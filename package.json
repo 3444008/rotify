@@ -1,0 +1,29 @@
+{
+  "name": "rotify",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Rotify - генератор графика смен",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint .",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "jspdf": "^4.2.1",
+    "vue": "^3.5.39"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@vitejs/plugin-vue": "^6.0.7",
+    "@vue/test-utils": "^2.4.11",
+    "eslint": "^10.6.0",
+    "eslint-plugin-vue": "^10.9.2",
+    "globals": "^17.7.0",
+    "happy-dom": "^20.10.6",
+    "vite": "^8.1.2",
+    "vitest": "^4.1.9"
+  }
+}

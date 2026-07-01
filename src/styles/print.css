@@ -1,0 +1,69 @@
+@media print {
+/*
+ * Rotify - печать / сохранение в PDF.
+ * Оставляем на листе только табель (лист графика), убирая интерфейс.
+ */
+
+.no-print { display: none !important; }
+
+body {
+  background: #fff !important;
+  background-image: none !important;
+  color: #000;
+  font-size: 11px;
+}
+
+/* Раскладку разбираем: на печати остаётся только правая панель.
+   !important перебивает мобильное правило скрытия по вкладкам
+   (#app[data-tab=...] .panel--...), чтобы график печатался всегда -
+   даже если печать идёт с узкого листа/телефона или с вкладки "Настройки". */
+.layout { display: block; padding: 0; margin: 0; max-width: none; }
+.panel--settings { display: none !important; }
+.panel--schedule { display: block !important; }
+
+/* Лист без рамок/теней/анимации - только содержимое. */
+.sheet {
+  background: #fff; border: none; border-radius: 0;
+  box-shadow: none; padding: 0; animation: none;
+}
+.sheet-head { border-bottom: 1.5px solid #000; }
+.sheet-title { font-size: 20px; }
+
+/* Календарь на всю ширину, чёткая сетка. */
+.cal-cell {
+  border: 1px solid #333; min-height: 0; box-shadow: none !important; transform: none !important;
+}
+.cal-cell.is-weekend, .cal-weekday.is-weekend { background: #eee !important; }
+.chip {
+  border-left: none; border-radius: 0;
+  background: #fff !important; color: #000 !important;
+  padding: 1px 4px 1px 2px;
+}
+/* Цветной квадратик-маркер вместо точки/пилюли. */
+.chip::before {
+  content: ''; display: inline-block;
+  width: 8px; height: 8px; border-radius: 0;
+  background: var(--chip); margin-right: 5px; vertical-align: 0;
+}
+/* Плашки сотрудников в списке нагрузки - тоже квадратные, без теней. */
+.swatch, .swatch-sm { border-radius: 0 !important; box-shadow: none !important; }
+.cal-cell, .cal-grid > * { page-break-inside: avoid; }
+
+/* Статистику по нагрузке тоже печатаем - полезно для табеля.
+   Раскладываем по 2 сотрудника в ряд (обычно их <= 8), чтобы список
+   не растягивался в высоту и не разрывался на вторую страницу. */
+.ledger-bar { display: none; }
+.ledger-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3px 28px;
+}
+.ledger-row { break-inside: avoid; page-break-inside: avoid; }
+.ledger-name { flex-basis: auto; flex: 1; }
+.ledger-title { break-after: avoid; page-break-after: avoid; }
+
+/* Печать цветных плашек-акцентов. */
+* { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+@page { size: landscape; margin: 12mm; }
+}
