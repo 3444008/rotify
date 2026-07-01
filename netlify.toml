@@ -1,0 +1,8 @@
+# Netlify: собирать проект Vite и публиковать готовый бандл из dist/
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  # Vite 8 требует Node 20.19+; "20" на Netlify резолвится в свежий 20.x
+  NODE_VERSION = "20"
